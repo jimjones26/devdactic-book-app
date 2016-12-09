@@ -13,10 +13,18 @@ import { NavController } from 'ionic-angular';
 })
 export class ReadPage {
 
-  constructor(public navCtrl: NavController) {}
+  myVar = {text: ''};
+
+  constructor(public navCtrl: NavController) {
+    this.myVar.text = 'Ionic';
+  }
 
   ionViewDidLoad() {
     console.log('Hello ReadPage Page');
+  }
+
+  public changeText() {
+    this.myVar.text = 'Simon';
   }
 
 }
