@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 
 import { RssService } from './../providers/rss-service';
 
+import { IntroPage } from './../pages/intro/intro';
 import { ContactPage } from './../pages/contact/contact';
 import { LearnPage } from './../pages/learn/learn';
 import { ReadPage } from './../pages/read/read';
@@ -13,6 +14,7 @@ import { FeedsPage } from './../pages/feeds/feeds';
 @NgModule({
   declarations: [
     MyApp,
+    IntroPage,
     TabsPage,
     ReadPage,
     LearnPage,
@@ -25,6 +27,7 @@ import { FeedsPage } from './../pages/feeds/feeds';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    IntroPage,
     TabsPage,
     ReadPage,
     LearnPage,
