@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { RssService } from './../../providers/rss-service';
+
 /*
   Generated class for the Read page.
 
@@ -15,7 +17,7 @@ export class ReadPage {
 
   myVar = {text: ''};
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private rssService: RssService) {
     this.myVar.text = 'Ionic';
   }
 
@@ -25,6 +27,10 @@ export class ReadPage {
 
   public changeText() {
     this.myVar.text = 'Simon';
+  }
+
+  public loadText() {
+    this.myVar.text = this.rssService.getSomeText();
   }
 
 }

@@ -9,8 +9,9 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input name="text" [(ngModel)]="myVar.txt"></ion-input>
+    <ion-input name="text" [(ngModel)]="myVar.text"></ion-input>
   </ion-item>
   <h2>Hello {{ myVar.text }}!</h2>
   <button ion-button full (click)="changeText()">Change the Text!</button>
+  <button ion-button full (click)="loadText()">Load text from Service</button>
 </ion-content>
