@@ -1,36 +1,33 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, App, Nav } from 'ionic-angular';
+import { FeedsPage } from './../feeds/feeds';
 
 import { RssService } from './../../providers/rss-service';
 
-/*
-  Generated class for the Read page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-read',
   templateUrl: 'read.html'
 })
 export class ReadPage {
+  @ViewChild(Nav) nav: Nav;
+  rootPage: any = FeedsPage;
+  categories: Array<{ title: string, key: string }>;
 
-  myVar = {text: ''};
-
-  constructor(public navCtrl: NavController, private rssService: RssService) {
-    this.myVar.text = 'Ionic';
+  constructor(private navCtrl: NavController, public rssService: RssService, private app: App) {
+    this.categories = [
+      { title: 'Mobile Development', key: 'mobile' },
+      { title: 'Web Development', key: 'web' },
+      { title: 'Productivity', key: 'productivity' },
+      { title: 'Dev Thoughts', key: 'dev-thoughts' }
+    ];
   }
 
   ionViewDidLoad() {
     console.log('Hello ReadPage Page');
   }
 
-  public changeText() {
-    this.myVar.text = 'Simon';
-  }
-
-  public loadText() {
-    this.myVar.text = this.rssService.getSomeText();
+  public reloadFeed(cat: string) {
+    this.nav.setRoot(FeedsPage, { category: cat });
   }
 
 }

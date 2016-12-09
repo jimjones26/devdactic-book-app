@@ -8,6 +8,7 @@ import { ContactPage } from './../pages/contact/contact';
 import { LearnPage } from './../pages/learn/learn';
 import { ReadPage } from './../pages/read/read';
 import { TabsPage } from './../pages/tabs/tabs';
+import { FeedsPage } from './../pages/feeds/feeds';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TabsPage } from './../pages/tabs/tabs';
     TabsPage,
     ReadPage,
     LearnPage,
-    ContactPage
+    ContactPage,
+    FeedsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,8 @@ import { TabsPage } from './../pages/tabs/tabs';
     TabsPage,
     ReadPage,
     LearnPage,
-    ContactPage
+    ContactPage,
+    FeedsPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
