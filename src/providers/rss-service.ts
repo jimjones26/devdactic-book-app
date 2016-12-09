@@ -2,21 +2,61 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the RssService provider.
+export class FeedItem {
+  description: string;
+  link: string;
+  title: string;
+  date: string;
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+  constructor(description: string, link: string, title: string, date: string) {
+    this.description = description;
+    this.link = link;
+    this.title = title;
+    this.date = date;
+  }
+}
+
 @Injectable()
 export class RssService {
 
-  constructor(public http: Http) {
+  constructor(private http: Http) {
     console.log('Hello RssService Provider');
   }
 
-  getSomeText(): string {
-    return 'This is some text from my service!';
+  public getArticlesForCategory(category: string) {
+    var feedUrl = 'https://devdactic.com/feed/';
+
+    if (category !== '') {
+      feedUrl = 'https://devdactic.com/' + category + '/feed/';
+    }
+
+    var url = 'https://query.yahooapis.com/v1/public/yql?q=select%20title%2Clink%2Cdescription%2CpubDate%20from%20rss%20where%20url%3D%22'+encodeURIComponent(feedUrl)+'%22&format=json';
+
+    let articles = [];
+
+    return this.http.get(url)
+    .map(data => data.json()['query']['results'])
+    .map((res) => {
+      if (res === null) {
+        return [];
+      }
+
+      let objects = res['item'];
+      var length = 20;
+
+      console.log('from rss-service: value of length OUTSIDE for loop', length);
+
+      for (let i = 0; i < objects.length; i++) {
+        console.log('from rss-service: value of length INSIDE for loop', length);
+        let item = objects[i];
+        var trimmedDescription = item.description.length > length ?
+        item.description.substring(0, 60) + "..." :
+        item.description;
+        let newFeedItem = new FeedItem(trimmedDescription, item.link, item.title, item.pubDate);
+        articles.push(newFeedItem);
+      }
+      return articles;
+    });
   }
 
 }
